@@ -1,5 +1,5 @@
 /*
-Library reserve processor v0.3.0-alpha
+Library reserve processor v0.3.0-beta
 
 Copyright 2024 George Gong, Jimson Cui
 
