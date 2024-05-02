@@ -1,5 +1,5 @@
 /*
-Library reserve processor v0.2 alpha
+Library reserve processor v0.2.0-alpha
 
 About this script:
 This script automates the reserving process of the AGS library, which uses Accessit software.
