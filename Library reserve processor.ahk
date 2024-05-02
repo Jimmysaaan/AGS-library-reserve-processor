@@ -20,7 +20,7 @@ The script then proceeds to press OK on subsequent dialog boxes
 }
 
 Action(){
-	;if WinWaitActive("Select Option", , 3){ ;Wait for Reserve dialog box, 3secs till timeout
+	if WinWaitActive("Select Option", , 3){ ;Wait for Reserve dialog box, 3secs till timeout
 		sleep 20
 		send "{Tab}"
 		send "{Tab}"
@@ -53,8 +53,8 @@ Action(){
 		else{
 			MsgBox "Time out while waiting for email sent confirmation dialog box."
 		}
-	;}
-	;else{
-	;	MsgBox "Time out while waiting for 'Select Option' window. Check if the reserve dialog box is open."
-	;}
+	}
+	else{
+		MsgBox "Time out while waiting for 'Select Option' window. Check if the reserve dialog box is open."
+	}
 }
