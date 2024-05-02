@@ -1,5 +1,7 @@
 /*
-Library reserve processor v0.2.0-alpha
+Library reserve processor v0.3.0-alpha
+
+Copyright 2024 George Gong, Jimson Cui
 
 About this script:
 This script automates the reserving process of the AGS library, which uses Accessit software.
@@ -12,17 +14,15 @@ The script then proceeds to press OK on subsequent dialog boxes
 */
 !r::
 {
-;	Result := MsgBox("Do you want to process the reserve? (press Enter for Yes)", , "YesNo") ;confirmation box
-;	if Result = "No"{
-;		return
-;	}
+	;if it doesnt work, skill issue!
 	Action()
 }
 
 Action(){
-	;if WinWaitActive("Select Option", , 3){ ;Wait for Reserve dialog box, 3secs till timeout
+	if WinWaitActive("Select Option", , 1){ ;Wait for Reserve dialog box, 1secs till timeout
 		sleep 20
 		send "{Tab}"
+		sleep 20
 		send "{Tab}"
 		sleep 20
 		send "{Space}" ;selects the first checkbox
@@ -53,8 +53,8 @@ Action(){
 		else{
 			MsgBox "Time out while waiting for email sent confirmation dialog box."
 		}
-	;}
-	;else{
-	;	MsgBox "Time out while waiting for 'Select Option' window. Check if the reserve dialog box is open."
-	;}
+	}
+	else{
+		MsgBox "Time out while waiting for 'Select Option' window. Check if the reserve dialog box is open."
+	}
 }
