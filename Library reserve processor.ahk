@@ -12,6 +12,8 @@ This script checks the requires checkboxes in the reserve dialog box to:
 -	Send email
 The script then proceeds to press OK on subsequent dialog boxes
 */
+#Requires AutoHotkey v2.0 
+#SingleInstance Force
 !r::
 {
 	Action()
