@@ -8,4 +8,5 @@ This script checks the required checkboxes in the reserve dialog box to:
 -	Print letter
 -	Print receipt
 -	Send email
+
 The script then proceeds to press OK on subsequent dialog boxes
