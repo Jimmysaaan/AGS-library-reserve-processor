@@ -1,5 +1,5 @@
 /*
-Library reserve processor v0.3.0-beta
+Library reserve processor v0.4.0-beta
 
 Copyright 2024 George Gong, Jimson Cui
 
@@ -12,49 +12,49 @@ This script checks the requires checkboxes in the reserve dialog box to:
 -	Send email
 The script then proceeds to press OK on subsequent dialog boxes
 */
+#Requires AutoHotkey v2.0 
+#SingleInstance Force
 !r::
 {
-	;if it doesnt work, skill issue!
 	Action()
 }
 
 Action(){
-	if WinWaitActive("Select Option", , 1){ ;Wait for Reserve dialog box, 1secs till timeout
+	timeout := WinActive("Select Option") ;Check if the Reserve dialog box is active
+	if timeout = 0{
+		MsgBox("Reserve dialog box not detected", "AGS Library reserve processor", "iconi")
+		return
+	}
+	sleep 20
+	send "{Tab}"
+	sleep 20
+	send "{Tab}"
+	sleep 20
+	send "{Space}" ;selects the first checkbox
+	Loop 2{ ;selects the 2 other checkboxes
 		sleep 20
 		send "{Tab}"
 		sleep 20
-		send "{Tab}"
-		sleep 20
-		send "{Space}" ;selects the first checkbox
-		Loop 2{ ;selects the 2 other checkboxes
-			sleep 20
-			send "{Tab}"
-			sleep 20
-			send "{Space}"
-		}
-		send "{Enter}" ;selects "Process"
-		if WinWaitActive("Print", , 3){ ;Wait for print dialog, 3secs till timeout
-			send "{Enter}" ;Hits enter on the print dialog
-		}
-		else{
-			MsgBox "Time out while waiting for Print dialog box."
-			return
-		}
-		sleep 20
-		send "{Enter}"
-		sleep 20
-		send "{Tab 3}" ;selects "OK" on email dialog box
-		sleep 20
-		send "{Enter}" ;presses "OK"
-		if WinWaitActive("Confirmation", , 3){ ;waits for email sent confirmation message
-			sleep 20
-			send "{Enter}" ;hits "OK" on confirmation message
-		}
-		else{
-			MsgBox "Time out while waiting for email sent confirmation dialog box."
-		}
+		send "{Space}"
 	}
-	else{
-		MsgBox "Time out while waiting for 'Select Option' window. Check if the reserve dialog box is open."
+	send "{Enter}" ;selects "Process"
+	timeout := WinWaitActive("Print", , 3) ;Wait for print dialog, 3secs till timeout
+	if timeout = 0{
+		MsgBox("Time out while waiting for Print dialog box.", "AGS Library reserve processor", "iconx")
+		return
 	}
+	send "{Enter}" ;Hits enter on the print dialog
+	sleep 20
+	send "{Enter}"
+	sleep 20
+	send "{Tab 3}" ;selects "OK" on email dialog box
+	sleep 20
+	send "{Enter}" ;presses "OK"
+	timeout := WinWaitActive("Confirmation", , 5) ;waits for email sent confirmation message
+	if timeout = 0{
+		MsgBox("Time out while waiting for email sent confirmation dialog box.", "AGS Library reserve processor", "iconx")
+		return
+	}
+	sleep 20
+	send "{Enter}" ;hits "OK" on confirmation message
 }
