@@ -1,3 +1,4 @@
+# This is the python port of the ahk script
 # AGS-library-reserve-processor
 A script to automate the reserving process in the AGS library
 
@@ -9,3 +10,6 @@ This script checks the required checkboxes in the reserve dialog box to:
 -	Print receipt
 -	Send email
 The script then proceeds to press OK on subsequent dialog boxes
+
+## dependencies
+```pip install -r setup.txt```
