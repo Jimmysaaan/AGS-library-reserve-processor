@@ -5,14 +5,16 @@ from pynput.keyboard import Key, Controller
 
 from ctypes import wintypes, windll, create_unicode_buffer
 
-def spawnDialogBox():
-    #TODO: fully implement this function. not just the current template
-    WS_EX_TOPMOST = 0x40000
-    windowTitle = "Python Windows Message Box Test"
-    message = "Hello, world! This Message box was created by calling the Windows API using the ctypes library."
-
-    # display a message box; execution will stop here until user acknowledges
-    windll.user32.MessageBoxExW(None, message, windowTitle, WS_EX_TOPMOST)
+MB_OK = 0x0
+MB_OKCXL = 0x01
+MB_YESNOCXL = 0x03
+MB_YESNO = 0x04
+MB_HELP = 0x4000
+WS_EX_TOPMOST = 0x40000
+# icons
+ICON_EXCLAIM = 0x30
+ICON_INFO = 0x40
+ICON_STOP = 0x10
 
 def getForegroundWindowTitle() :
     hWnd = windll.user32.GetForegroundWindow()
@@ -38,10 +40,13 @@ def timeout_a_function(function, args, timeout_duration):
 k = Controller()
 def run_reserve_process():
     #entry detection
-    timeout_result = timeout_a_function(activeWindowIs,("Select Option",),0.5)
-    if timeout_result is None:
-        print("timed out")
-        return
+    print("ran")
+    timeout_result = activeWindowIs("Select Option")
+    if timeout_result == False:
+        result = windll.user32.MessageBoxExW(None,"Reserve dialog box not detected.\nDo you want to continue anyway?","AGS Library reserve processor",ICON_INFO|MB_YESNO)
+        print("timed out",result)
+        if result == 7:
+            return
     sleep(20/1000)
     k.press(Key.tab)
     sleep(20/1000)
@@ -57,6 +62,7 @@ def run_reserve_process():
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Print",),3)
     if timeout_result is None:
+        windll.user32.MessageBoxExW(None,"Time out while waiting for Print dialog box.", "AGS Library reserve processor",ICON_STOP)
         print("timed out")
         return
     k.press(Key.enter)
@@ -71,6 +77,7 @@ def run_reserve_process():
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Confirmation",),3)
     if timeout_result is None:
+        windll.user32.MessageBoxExW(None,"Time out while waiting for  email sent confirmation dialog box.", "AGS Library reserve processor",ICON_STOP)
         print("timed out")
         return
     sleep(20/1000)
