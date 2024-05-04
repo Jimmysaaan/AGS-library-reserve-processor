@@ -22,8 +22,9 @@ The script then proceeds to press OK on subsequent dialog boxes
 Action(){
 	timeout := WinActive("Select Option") ;Check if the Reserve dialog box is active
 	if timeout = 0{
-		MsgBox("Reserve dialog box not detected", "AGS Library reserve processor", "iconi")
-		return
+		cont := MsgBox("Reserve dialog box not detected.`nDo you want to continue anyway?", "AGS Library reserve processor", "iconi YN Default2")
+		if (cont = "No")
+    		return
 	}
 	sleep 20
 	send "{Tab}"
