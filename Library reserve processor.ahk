@@ -46,7 +46,7 @@ Action(){
 	}
 	send "{Enter}" ;Hits enter on the print dialog
 	sleep 20
-	send "{Enter}"
+	send "{Enter}" ;Hits enter on the print confirmation dialog box
 	sleep 20
 	send "{Tab 3}" ;selects "OK" on email dialog box
 	sleep 20
