@@ -1,10 +1,18 @@
-import multiprocessing
 import time
 from time import sleep
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
 
 from ctypes import wintypes, windll, create_unicode_buffer
+
+def spawnDialogBox():
+    #TODO: fully implement this function. not just the current template
+    WS_EX_TOPMOST = 0x40000
+    windowTitle = "Python Windows Message Box Test"
+    message = "Hello, world! This Message box was created by calling the Windows API using the ctypes library."
+
+    # display a message box; execution will stop here until user acknowledges
+    windll.user32.MessageBoxExW(None, message, windowTitle, WS_EX_TOPMOST)
 
 def getForegroundWindowTitle() :
     hWnd = windll.user32.GetForegroundWindow()
