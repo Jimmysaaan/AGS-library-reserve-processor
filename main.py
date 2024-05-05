@@ -1,8 +1,11 @@
+import threading
 import time
 from time import sleep
+
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
 
+import gui
 from ctypes import wintypes, windll, create_unicode_buffer
 
 MB_OK = 0x0
@@ -42,10 +45,12 @@ def run_reserve_process():
     #entry detection
     print("ran")
     timeout_result = activeWindowIs("Select Option")
-    if timeout_result == False:
-        result = windll.user32.MessageBoxExW(None,"Reserve dialog box not detected.\nDo you want to continue anyway?","AGS Library reserve processor",ICON_INFO|MB_YESNO)
+    if not timeout_result:
+        m.signal(0)
+        while (result := m.consume_result()) is None:
+            pass
         print("timed out",result)
-        if result == 7:
+        if result != 6: #6 is the success (continue) result of the msg box
             return
     sleep(20/1000)
     k.press(Key.tab)
@@ -62,7 +67,7 @@ def run_reserve_process():
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Print",),3)
     if timeout_result is None:
-        windll.user32.MessageBoxExW(None,"Time out while waiting for Print dialog box.", "AGS Library reserve processor",ICON_STOP)
+        m.signal(1)
         print("timed out")
         return
     k.press(Key.enter)
@@ -77,19 +82,34 @@ def run_reserve_process():
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Confirmation",),3)
     if timeout_result is None:
-        windll.user32.MessageBoxExW(None,"Time out while waiting for  email sent confirmation dialog box.", "AGS Library reserve processor",ICON_STOP)
+        m.signal(2)
         print("timed out")
         return
     sleep(20/1000)
     k.press(Key.enter)
 
 def stop_thread():
+    m.signal(-1)
     exit()
 
+m = gui.MsgBoxManager()
+m.add_msg_box_attributes(None,"Reserve dialog box not detected.\nDo you want to continue anyway?","AGS Library reserve processor",ICON_INFO|MB_YESNO)
+m.add_msg_box_attributes(None,"Time out while waiting for Print dialog box.", "AGS Library reserve processor",ICON_STOP)
+m.add_msg_box_attributes(None,"Time out while waiting for  email sent confirmation dialog box.", "AGS Library reserve processor",ICON_STOP)
+m.start()
+
+def __hotkey__():
+    names = [t.name for t in threading.enumerate()]
+    if "temp_process" in names:
+        print("reserve process thread already running")
+        return
+    temp = threading.Thread(target=run_reserve_process)
+    temp.name = "temp_process"
+    temp.start()
 
 with keyboard.GlobalHotKeys(
     {
-        "<Shift>+<Alt>+r": run_reserve_process,
+        "<Shift>+<Alt>+r": __hotkey__,
         "<Ctrl>+c": stop_thread,
     }
 ) as h:
