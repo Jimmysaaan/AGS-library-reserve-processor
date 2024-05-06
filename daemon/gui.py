@@ -36,7 +36,7 @@ class MsgBoxManager():
     def add_msg_box_attributes(self,*args):
         self.msg_boxes.append(args)
 
-    def signal(self,id_attr:int):
+    def spawn_msgbox(self,id_attr:int):
         self.state = id_attr
         self.event.set()
 
