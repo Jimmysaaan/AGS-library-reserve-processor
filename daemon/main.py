@@ -1,4 +1,7 @@
 import f_opt
+import gui
+from configurations import Configurations
+
 import threading
 import time
 from time import sleep
@@ -6,7 +9,6 @@ from time import sleep
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
 
-import gui
 from ctypes import wintypes, windll, create_unicode_buffer
 
 MB_OK = 0x0
@@ -25,7 +27,6 @@ def getForegroundWindowTitle() :
     length = windll.user32.GetWindowTextLengthW(hWnd)
     buf = create_unicode_buffer(length + 1)
     windll.user32.GetWindowTextW(hWnd, buf, length + 1)
-
     return buf.value if buf.value else None
 
 def activeWindowIs(window_title: str):
@@ -40,6 +41,10 @@ def timeout_a_function(function, args, timeout_duration):
         value =  function(*args)
         if value:
             return value
+
+def press_and_release(key):
+    k.press(key)
+    k.release(key)
 
 k = Controller()
 def run_reserve_process():
@@ -57,33 +62,31 @@ def run_reserve_process():
         if result != 6: #6 is the success (continue) result of the msg box
             return
 
-    sleep(20/1000)
-    k.press(Key.tab)
-    sleep(20/1000)
-    k.press(Key.tab)
-    sleep(20/1000)
-    k.press(Key.space)
     for _ in range(2):
         sleep(20/1000)
-        k.press(Key.tab)
+        press_and_release(Key.tab)
+    sleep(20/1000)
+    press_and_release(Key.space)
+    for _ in range(2):
         sleep(20/1000)
-        k.press(Key.space)
-    k.press(Key.enter)
+        press_and_release(Key.tab)
+        sleep(20/1000)
+        press_and_release(Key.space)
+    press_and_release(Key.enter)
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Print",),3)
     if timeout_result is None:
         m.signal(1)
         print("timed out")
         return
-    k.press(Key.enter)
     #exits time out sequence
-    sleep(20/1000)
-    k.press(Key.enter)
-    sleep(20/1000)
+    for _ in range(2):
+        press_and_release(Key.enter)
+        sleep(20/1000)
     for _ in range(3):
-        k.press(Key.tab)
+        press_and_release(Key.tab)
     sleep(20/1000)
-    k.press(Key.enter)
+    press_and_release(Key.enter)
     #time out sequence
     timeout_result = timeout_a_function(activeWindowIs,("Confirmation",),3)
     if timeout_result is None:
@@ -91,28 +94,11 @@ def run_reserve_process():
         print("timed out")
         return
     sleep(20/1000)
-    k.press(Key.enter)
+    press_and_release(Key.enter)
 
 def stop_thread():
     m.signal(-1)
     exit()
-
-class Configurations():
-    def __init__(self) -> None:
-        self.behaviors = {
-            "SHOW_POPUP" : 0,
-            "DO_NOT_TRIGGER":1
-        }
-        self.hotkey = ""
-        self.behavior_of_reserve_menu_detector = self.behaviors["SHOW_POPUP"]
-    def set_key_binding(self,keys: str):
-        self.hotkey = keys
-    
-    def set_reserve_menu_detector_behavior(self,behavior:str):
-        result = self.behaviors.get(behavior)
-        if result is None:
-            raise ValueError(f"Undefined behavior '{behavior}' for when program detects 'Select Option' window")
-        self.behavior_of_reserve_menu_detector = self.behaviors[behavior]
 
 c = Configurations()
 f_opt.f_opt({
