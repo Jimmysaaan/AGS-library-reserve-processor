@@ -1,5 +1,5 @@
 import f_opt
-import gui
+from gui import activeWindowIs, MsgBoxManager
 from configurations import Configurations
 
 import threading
@@ -8,8 +8,6 @@ from time import sleep
 
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
-
-from ctypes import wintypes, windll, create_unicode_buffer
 
 MB_OK = 0x0
 MB_OKCXL = 0x01
@@ -22,15 +20,6 @@ ICON_EXCLAIM = 0x30
 ICON_INFO = 0x40
 ICON_STOP = 0x10
 
-def getForegroundWindowTitle() :
-    hWnd = windll.user32.GetForegroundWindow()
-    length = windll.user32.GetWindowTextLengthW(hWnd)
-    buf = create_unicode_buffer(length + 1)
-    windll.user32.GetWindowTextW(hWnd, buf, length + 1)
-    return buf.value if buf.value else None
-
-def activeWindowIs(window_title: str):
-    return getForegroundWindowTitle() == window_title
 
 def timeout_a_function(function, args, timeout_duration):
     #timeout_duration is in seconds
@@ -105,6 +94,7 @@ f_opt.f_opt({
     "-k":([str],c.set_key_binding),
     "-detector":([str],c.set_reserve_menu_detector_behavior)
 })
+
 if c.hotkey == "":
     raise ValueError("Hotkey not defined")
 
@@ -123,7 +113,7 @@ with keyboard.GlobalHotKeys(
         "<Ctrl>+c": stop_thread,
     }
 ) as h:
-    m = gui.MsgBoxManager()
+    m = MsgBoxManager()
     m.add_msg_box_attributes(None,"Reserve dialog box not detected.\nDo you want to continue anyway?","AGS Library reserve processor",ICON_INFO|MB_YESNO)
     m.add_msg_box_attributes(None,"Time out while waiting for Print dialog box.", "AGS Library reserve processor",ICON_STOP)
     m.add_msg_box_attributes(None,"Time out while waiting for  email sent confirmation dialog box.", "AGS Library reserve processor",ICON_STOP)

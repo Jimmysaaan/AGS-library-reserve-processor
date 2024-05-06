@@ -1,5 +1,16 @@
 import threading
-from ctypes import  windll
+from ctypes import  windll, create_unicode_buffer
+
+
+def getForegroundWindowTitle() :
+    hWnd = windll.user32.GetForegroundWindow()
+    length = windll.user32.GetWindowTextLengthW(hWnd)
+    buf = create_unicode_buffer(length + 1)
+    windll.user32.GetWindowTextW(hWnd, buf, length + 1)
+    return buf.value if buf.value else None
+
+def activeWindowIs(window_title: str):
+    return getForegroundWindowTitle() == window_title
 
 class MsgBoxManager():
     def __init__(self) -> None:
