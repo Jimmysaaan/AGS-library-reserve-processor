@@ -1,9 +1,9 @@
 <!DOCTYPE html>
+<!-- status page is default -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         .content{
             position: absolute;
@@ -21,13 +21,12 @@
         .sidebar ul li {
             position: relative;   
             list-style-type: none;
-            color: white;
             display: flex;
             align-items: center;
             text-decoration: none;
             padding-bottom: 10%;
         }
-        .sidebar button{
+        .sidebar a{
             border: none;
             border-radius: 10px;
             margin-right: 5vh;
@@ -36,16 +35,19 @@
             background-color: #cccccc;
         }
 
-        .sidebar button:hover{
+        .sidebar a:hover{
             background-color: #acacac;
         }
 
-        .sidebar button:active{
+        .sidebar a:active{
             background-color: #337bff;
         }
 
-        .sidebar span{
+        .sidebar span {
+            position: relative;
+            height: 30px;
             display: block;
+            text-align: center;
         }
     </style>
 </head>
@@ -54,33 +56,29 @@
         <div class="sidebar">
             <ul>
                 <li>
-                    <button>
-                        <span class="material-symbols-outlined">
-                            earthquake
-                            </span>
+                    <a>
+                        <span><img src="./status.svg"></span>
                         <span class="nav-item">Status</span>
-                    </button>
+                    </a>
                 </li>
                 <li>
-                    <button>
-                        <span class="material-symbols-outlined">
-                            settings
-                            </span>
+                    <a>
+                        <span><img src="./settings.svg"></span>
                         <span class="nav-item">Settings</span>
-                    </button>
+                    </a>
                 </li>
                 <li>
-                    <button>
-                        <span class="material-symbols-outlined">
-                            info
-                            </span>
+                    <a>
+                        <span><img src="./info.svg"></span>
                         <span class="nav-item">Info</span>
-                    </button>
+                    </a>
                 </li>
             </ul>
         </div>
-        <div id="status_page">
-            <h1>status</h1>
+        <div class="pages">
+            <div id="status_page">
+                <h1>status</h1>
+            </div>
         </div>
     </div>
 </body>
