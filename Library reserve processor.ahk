@@ -50,6 +50,7 @@ Action(){
 		MsgBox("Time out while waiting for print confirmation dialog box.", "AGS Library reserve processor", "iconx")
 		return
 	}
+	Send "{Enter}"
 	sleep 20
 	send "{Tab 3}" ;selects "OK" on email dialog box
 	sleep 20
