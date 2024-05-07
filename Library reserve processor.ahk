@@ -53,9 +53,15 @@ Action(){
 		return
 	}
 	send "{Enter}"
-	sleep 20
-	send "{Tab 3}" ;selects "OK" on email dialog box
-	sleep 20
+	timeout := WinWaitActive("Processing letters...", , 1) ;wait for "processing letters" menu to be foreground window
+	if timeout = 0{
+		MsgBox("Tim's out of the house", "Didnt find processing letters menu", "iconx 16384")
+		return
+	}
+	Loop 3{ ;selects the 2 other checkboxes
+		send "{Tab}"
+		sleep 20
+	}
 	send "{Enter}" ;presses "OK"
 	timeout := WinWaitActive("Confirmation", , 5) ;waits for email sent confirmation message
 	if timeout = 0{
