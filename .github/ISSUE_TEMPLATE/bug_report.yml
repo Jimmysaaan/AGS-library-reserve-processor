@@ -22,7 +22,7 @@ body:
       placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha
     validations:
       required: false
-  - type: checkboxes
+  - type: dropdown
     id: popup-content
     attributes:
       label: What does the popup say?
