@@ -1,0 +1,59 @@
+name: Bug Report
+description: File a bug report to help us improve
+labels:
+  - bug
+body:
+  - type: input
+    id: affected-version
+    attributes:
+      label: Version number(s)
+      description: |
+        - The version of the script affected by the bug.
+        - The version number can be found by hovering over the tray icon
+      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha
+    validations:
+      required: true
+  - type: input
+    id: working-version
+    attributes:
+      label: Most Recent Working Version
+      description: |
+        - If there is a previous version of the scripot that did not exhibit the bug, include it here.
+      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha
+    validations:
+      required: false
+  - type: dropdown
+    id: popup-content
+    attributes:
+      label: What does the popup say?
+      options:
+        - "There was no popup"
+        - "Reserve dialog box not detected. Do you want to continue anyway?"
+        - "Time out while waiting for Print dialog box."
+        - "Time out while waiting for print confirmation dialog box."
+        - "Tim's out of the house"
+        - "Time out while waiting for email sent confirmation dialog box."
+    validations:
+      required: true
+  - type: textarea
+    id: bug-summary
+    attributes:
+      label: Bug Summary
+      description: Briefly describe the bug.
+      placeholder: eg. Describe what window is open when the script stopped working
+    validations:
+      required: true
+  - type: textarea
+    id: supporting-files
+    attributes:
+      label: Screenshots / Minimum Reproducible Project
+      description: |
+        - Upload any screenshots showing the bug in action.
+  - type: checkboxes
+    id: search-for-existing
+    attributes:
+      label: Please search the issue tracker for existing bug reports before submitting your own.
+      description: If the same issue happened again, say so under the existing bug report if there is one.
+      options:
+        - label: I have searched all existing issues and confirmed that this is not a duplicate.
+          required: true
