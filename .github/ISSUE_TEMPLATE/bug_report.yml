@@ -33,7 +33,7 @@ body:
         - "Time out while waiting for print confirmation dialog box."
         - "Tim's out of the house"
         - "Time out while waiting for email sent confirmation dialog box."
-        multiple: true
+      multiple: true
     validations:
       required: true
   - type: textarea
