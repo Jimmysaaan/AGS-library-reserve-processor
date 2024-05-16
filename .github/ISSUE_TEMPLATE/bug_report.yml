@@ -27,12 +27,13 @@ body:
     attributes:
       label: What does the popup say?
       options:
+        - "There was no popup"
         - "Reserve dialog box not detected. Do you want to continue anyway?"
         - "Time out while waiting for Print dialog box."
         - "Time out while waiting for print confirmation dialog box."
         - "Tim's out of the house"
         - "Time out while waiting for email sent confirmation dialog box."
-        - "There was no popup"
+        multiple: true
     validations:
       required: true
   - type: textarea
