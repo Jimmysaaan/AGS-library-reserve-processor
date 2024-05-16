@@ -1,4 +1,3 @@
-# yamllint disable-file rule:line-length
 name: Bug Report
 description: File a bug report to help us improve
 labels:
@@ -26,6 +25,8 @@ body:
   - type: checkboxes
     id: popup-content
     attributes:
+      validations:
+        required: true
       label: What does the popup say?
       options:
         - label: "`Reserve dialog box not detected. Do you want to continue anyway?`"
@@ -34,8 +35,6 @@ body:
         - label: "`Tim's out of the house`"
         - label: "`Time out while waiting for email sent confirmation dialog box.`"
         - label: "There was no popup"
-    validations:
-      required: true
   - type: textarea
     id: bug-summary
     attributes:
