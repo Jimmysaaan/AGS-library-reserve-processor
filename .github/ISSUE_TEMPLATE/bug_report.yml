@@ -34,8 +34,8 @@ body:
         - label: "`Tim's out of the house`"
         - label: "`Time out while waiting for email sent confirmation dialog box.`"
         - label: "There was no popup"
-#    validations:
-#      required: true
+    validations:
+      required: true
   - type: textarea
     id: bug-summary
     attributes:
