@@ -55,10 +55,10 @@ Action(){
 	send "{Enter}"
 	timeout := WinWaitActive("Processing letters...", , 1) ;wait for "processing letters" menu to be foreground window
 	if timeout = 0{
-		MsgBox("Tim's out of the house", "Didnt find processing letters menu", "iconx 16384")
+		MsgBox('Time out while waiting for "Processing letters..." menu', "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	Loop 3{ ;selects the 2 other checkboxes
+	Loop 3{ ;moves selection to "OK" button
 		send "{Tab}"
 		sleep 20
 	}
