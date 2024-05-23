@@ -14,6 +14,23 @@ The script then proceeds to press OK on subsequent dialog boxes
 */
 #Requires AutoHotkey v2.0 
 #SingleInstance Force
+
+A_TrayMenu.Delete()
+A_TrayMenu.AddStandard()
+A_TrayMenu.Add("&About", About)
+
+About(*){
+	MyGui := Gui(, "Simple Input Example")
+	MyGui.Add("Text",, "Library reserve processor v0.4.0-beta`n`nCopyright 2024 George Gong, Jimson Cui`n`nAbout this script:`nThis script automates the reserving process of the AGS library, which uses Accessit software.`nPress 'alt+r' to run this script to process a reserve.`nThis script checks the requires checkboxes in the reserve dialog box to:`n-	Print letter`n-	Print receipt`n-	Send email`nThe script then proceeds to press OK on subsequent dialog boxes")
+	MyGui.Add("Button", "default", "Open GitHub").OnEvent("Click", moreInfo)
+	MyGui.Show()
+
+	moreInfo(*)
+	{
+		Run("https://github.com/Jimmysaaan/AGS-library-reserve-processor")
+	}
+}
+
 !r::
 {
 	Action()
