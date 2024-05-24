@@ -10,18 +10,20 @@ This script checks the requires checkboxes in the reserve dialog box to:
 -	Print letter
 -	Print receipt
 -	Send email
-The script then proceeds to press OK on subsequent dialog boxes
+The script then proceeds to press OK on subsequent dialog boxes.
 */
 #Requires AutoHotkey v2.0 
 #SingleInstance Force
 
-A_TrayMenu.Delete()
-A_TrayMenu.AddStandard()
-A_TrayMenu.Add("&About", About)
+A_TrayMenu.Delete() ;clears tray menu 
+A_TrayMenu.Add("&About", about) ;adds "About" button and calls "about" when clicked
+A_TrayMenu.Add() ;adds a separator
+;A_TrayMenu.Add("&Rebind Hotkey",rebindHotkey)
+A_TrayMenu.AddStandard() ;adds default tray menu items including "Suspend Hotkeys" and "Exit"
 
-About(*){
-	MyGui := Gui(, "Simple Input Example")
-	MyGui.Add("Text",, "Library reserve processor v0.4.0-beta`n`nCopyright 2024 George Gong, Jimson Cui`n`nAbout this script:`nThis script automates the reserving process of the AGS library, which uses Accessit software.`nPress 'alt+r' to run this script to process a reserve.`nThis script checks the requires checkboxes in the reserve dialog box to:`n-	Print letter`n-	Print receipt`n-	Send email`nThe script then proceeds to press OK on subsequent dialog boxes")
+about(*){
+	MyGui := Gui(, "About")
+	MyGui.Add("Text",, "Library reserve processor v0.4.0-beta`n`nCopyright 2024 George Gong, Jimson Cui`n`nAbout this script:`nThis script automates the reserving process of the AGS library, which uses Accessit software.`nPress 'alt+r' to run this script to process a reserve.`nThis script checks the requires checkboxes in the reserve dialog box to:`n-	Print letter`n-	Print receipt`n-	Send email`nThe script then proceeds to press OK on subsequent dialog boxes.")
 	MyGui.Add("Button", "default", "Open GitHub").OnEvent("Click", moreInfo)
 	MyGui.Show()
 
@@ -31,12 +33,9 @@ About(*){
 	}
 }
 
-!r::
-{
-	Action()
-}
+Hotkey "!r", Action
 
-Action(){
+Action(*){
 	OnMessage(WM_HELP := 0x0053, (*) => Run("https://github.com/Jimmysaaan/AGS-library-reserve-processor"))
 	g := Gui("+OwnDialogs")
 	timeout := WinActive("Select Option") ;Check if the Reserve dialog box is active
