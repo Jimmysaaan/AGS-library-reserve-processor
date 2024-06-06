@@ -36,6 +36,8 @@ about(*){
 Hotkey "!r", Action
 
 Action(*){
+	SendMode "Event"
+	SetKeyDelay 20
 	OnMessage(WM_HELP := 0x0053, (*) => Run("https://github.com/Jimmysaaan/AGS-library-reserve-processor"))
 	g := Gui("+OwnDialogs")
 	timeout := WinActive("Select Option") ;Check if the Reserve dialog box is active
@@ -44,16 +46,16 @@ Action(*){
 		if (cont = "No")
     		return
 	}
-	sleep 20
+;	sleep 20
 	send "{Tab}"
-	sleep 20
+;	sleep 20
 	send "{Tab}"
-	sleep 20
+;	sleep 20
 	send "{Space}" ;selects the first checkbox
 	Loop 2{ ;selects the 2 other checkboxes
-		sleep 20
+;		sleep 20
 		send "{Tab}"
-		sleep 20
+;		sleep 20
 		send "{Space}"
 	}
 	send "{Enter}" ;selects "Process"
@@ -76,7 +78,7 @@ Action(*){
 	}
 	Loop 3{ ;moves selection to "OK" button
 		send "{Tab}"
-		sleep 20
+;		sleep 20
 	}
 	send "{Enter}" ;presses "OK"
 	timeout := WinWaitActive("Confirmation", , 5) ;waits for email sent confirmation message
@@ -84,6 +86,6 @@ Action(*){
 		MsgBox("Time out while waiting for email sent confirmation dialog box.", "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	sleep 20
+;	sleep 20
 	send "{Enter}" ;hits "OK" on confirmation message
 }
