@@ -46,19 +46,7 @@ Action(*){
 		if (cont = "No")
     		return
 	}
-;	sleep 20
-	send "{Tab}"
-;	sleep 20
-	send "{Tab}"
-;	sleep 20
-	send "{Space}" ;selects the first checkbox
-	Loop 2{ ;selects the 2 other checkboxes
-;		sleep 20
-		send "{Tab}"
-;		sleep 20
-		send "{Space}"
-	}
-	send "{Enter}" ;selects "Process"
+	send "{Tab 2}{Space}{Tab}{Space}{Tab}{Space}{Enter}" ;selects required checkboxes
 	timeout := WinWaitActive("Print", , 3) ;Wait for print dialog, 3secs till timeout
 	if timeout = 0{
 		MsgBox("Time out while waiting for Print dialog box.", "AGS Library reserve processor", "iconx 16384")
@@ -76,16 +64,11 @@ Action(*){
 		MsgBox('Time out while waiting for "Processing letters..." menu', "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	Loop 3{ ;moves selection to "OK" button
-		send "{Tab}"
-;		sleep 20
-	}
-	send "{Enter}" ;presses "OK"
+	Send "{Tab 3}{Enter}" ;presses "OK"
 	timeout := WinWaitActive("Confirmation", , 5) ;waits for email sent confirmation message
 	if timeout = 0{
 		MsgBox("Time out while waiting for email sent confirmation dialog box.", "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-;	sleep 20
 	send "{Enter}" ;hits "OK" on confirmation message
 }
