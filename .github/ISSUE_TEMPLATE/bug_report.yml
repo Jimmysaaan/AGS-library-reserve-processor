@@ -9,8 +9,8 @@ body:
       label: Version number(s)
       description: |
         - The version of the script affected by the bug.
-        - The version number can be found by hovering over the tray icon
-      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha
+        - The version number can be found by right-clicking on the tray icon then pressing "About" or by hovering over the tray icon for older versions
+      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha-python, 0.5.0-beta-ahk
     validations:
       required: true
   - type: input
@@ -19,7 +19,7 @@ body:
       label: Most Recent Working Version
       description: |
         - If there is a previous version of the scripot that did not exhibit the bug, include it here.
-      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha
+      placeholder: eg. 0.4.0, 0.4.0-beta, 0.5.0-alpha-python
     validations:
       required: false
   - type: dropdown
@@ -47,9 +47,9 @@ body:
   - type: textarea
     id: supporting-files
     attributes:
-      label: Screenshots / Minimum Reproducible Project
+      label: Screenshots
       description: |
-        - Upload any screenshots showing the bug in action.
+        - Upload any screenshots showing the result after the script stopped working
   - type: checkboxes
     id: search-for-existing
     attributes:

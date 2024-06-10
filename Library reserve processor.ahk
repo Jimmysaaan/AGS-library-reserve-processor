@@ -1,5 +1,5 @@
 /*
-Library reserve processor v0.4.0-beta
+Library reserve processor v0.5.0-beta-AHK
 
 Copyright 2024 George Gong, Jimson Cui
 
@@ -37,7 +37,7 @@ about(*){ ;shows the about box
 	aboutGui.Add("Text", "x10 y10 w310 h30 +0x200", "Library reserve processor")
 	aboutGui.SetFont("s8 Norm cBlack", "Ms Shell Dlg")
 	
-	aboutGui.Add("Text", "x10 y45 w90 h15", "version 0.4.1-beta") ;**change version number here**
+	aboutGui.Add("Text", "x10 y45", "version 0.5.0-beta-AHK") ;**change version number here**
 	
 	aboutGui.Add("Text", "x327 y270", "© 2024 George Gong, Jimson Cui") ;copyright information
 	aboutGui.SetFont("s10 Norm cBlack", "Ms Shell Dlg")
