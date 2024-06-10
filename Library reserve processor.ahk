@@ -32,7 +32,7 @@ about(*){ ;shows the about box
 
 	aboutGui := Gui()
 	aboutGui.Add("Button", "x10 y266", "&Open GitHub").OnEvent("Click", moreInfo)
-	aboutGui.Opt("-MinimizeBox -MaximizeBox +Owner")
+	aboutGui.Opt("-MinimizeBox -MaximizeBox")
 	aboutGui.SetFont("s20 cNavy")
 	aboutGui.Add("Text", "x10 y10 w310 h30 +0x200", "Library reserve processor")
 	aboutGui.SetFont("s8 Norm cBlack", "Ms Shell Dlg")
