@@ -1,8 +1,10 @@
-# AGS-library-reserve-processor
+![](https://learn.microsoft.com/en-us/windows/apps/design/style/images/segoe-mdl/ec5b.png)
+
+# AGS library reserve processor
 A script to automate the reserving process in the AGS library.
 
 ## If something broke...
-Make a bug report [here](https://github.com/Jimmysaaan/AGS-library-reserve-processor/issues/new?template=bug_report.yml).
+Make a bug report [here](../../issues/new?template=bug_report.yml).
 
 ## About this script
 This script automates the reserving process of the AGS library, which uses Accessit software.
