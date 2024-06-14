@@ -31,7 +31,9 @@ about(*){ ;shows the about box
 	;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
 
 	aboutGui := Gui()
-	aboutGui.Add("Button", "x10 y266", "&Open GitHub").OnEvent("Click", moreInfo)
+	aboutGui.MarginX := 10
+	aboutGui.MarginY := 10
+	aboutGui.Add("Button", "y266", "&Open GitHub").OnEvent("Click", moreInfo)
 	aboutGui.Opt("-MinimizeBox -MaximizeBox")
 	aboutGui.SetFont("s20 cNavy")
 	aboutGui.Add("Text", "x10 y10 w310 h30 +0x200", "Library reserve processor")
