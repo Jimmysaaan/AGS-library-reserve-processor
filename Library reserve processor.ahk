@@ -66,19 +66,19 @@ Action(*){
 		if (cont = "No")
     		return
 	}
-	send "{Tab 2}{Space}{Tab}{Space}{Tab}{Space}{Enter}" ;selects required checkboxes
+	Send "{Tab 2}{Space}{Tab}{Space}{Tab}{Space}{Enter}" ;selects required checkboxes
 	timeout := WinWaitActive("Print", , 3) ;waits for print dialog, 3secs till timeout
 	if timeout = 0{
 		MsgBox("Time out while waiting for Print dialog box.", "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	send "{Enter Up}{Enter}" ;hits enter on the print dialog. `{Enter Up}` is added to apply the SetKeyDelay delay before the keypress
+	Send "{Enter Up}{Enter}" ;hits enter on the print dialog. `{Enter Up}` is added to apply the SetKeyDelay delay before the keypress
 	timeout := WinWaitActive("Confirmation", , 1) ;waits for print confirmation message
 	if timeout = 0{
 		MsgBox("Time out while waiting for print confirmation dialog box.", "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	send "{Enter Up}{Enter}"
+	Send "{Enter Up}{Enter}"
 	timeout := WinWaitActive("Processing letters...", , 1) ;waits for "processing letters" menu to be foreground window
 	if timeout = 0{
 		MsgBox('Time out while waiting for "Processing letters..." menu', "AGS Library reserve processor", "iconx 16384")
@@ -90,5 +90,5 @@ Action(*){
 		MsgBox("Time out while waiting for email sent confirmation dialog box.", "AGS Library reserve processor", "iconx 16384")
 		return
 	}
-	send "{Enter Up}{Enter}" ;hits "OK" on confirmation message
+	Send "{Enter Up}{Enter}" ;hits "OK" on confirmation message
 }
