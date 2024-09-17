@@ -48,8 +48,12 @@ body:
     id: supporting-files
     attributes:
       label: Screenshots
-      description: |
-        - Upload any screenshots showing the result after the script stopped working
+      description: Upload any screenshots showing the result after the script stopped working
+  - type: textarea
+    id: other
+    attributes:
+      label: Other Notes
+      description: Write anything else you want to include in the bug report
   - type: checkboxes
     id: search-for-existing
     attributes:
