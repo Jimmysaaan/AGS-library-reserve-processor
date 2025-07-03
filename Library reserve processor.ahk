@@ -25,6 +25,8 @@ A_TrayMenu.Add("&About", about) ;adds "About" button and calls "about" when clic
 A_TrayMenu.Add() ;adds a separator
 A_TrayMenu.AddStandard() ;adds default tray menu items including "Suspend Hotkeys" and "Exit"
 
+TrayTip("The reserve processor script is now running in the background.`nPress 'alt+r' to process a reserved book", "AGS Library reserve processor", 4) ;shows tray tip (or toast notification on Windows 10+) when the program starts
+
 about(*){ ;shows the about box
 	;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
 	;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter
@@ -59,7 +61,7 @@ Hotkey "!r", Action
 
 Action(*){
 	OnMessage(WM_HELP := 0x0053, (*) => Run("https://github.com/Jimmysaaan/AGS-library-reserve-processor"))
-	g := Gui("+OwnDialogs")
+	g := Gui("+OwnDialogs") ;opens the github page when the help button on pop-ups is pressed
 	timeout := WinActive("Select Option") ;Check if the Reserve dialog box is active
 	if timeout = 0{
 		cont := MsgBox("Reserve dialog box not detected.`nDo you want to continue anyway?", "AGS Library reserve processor", "iconi YN Default2 16384")
