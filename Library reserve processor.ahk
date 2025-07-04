@@ -1,5 +1,5 @@
 /*
-Library reserve processor v0.5.0-beta-AHK
+Library reserve processor v0.6.0-beta-AHK
 
 Copyright 2024 George Gong, Jimson Cui
 
@@ -15,6 +15,7 @@ The script then proceeds to press OK on subsequent dialog boxes.
 
 #Requires AutoHotkey v2.0 
 #SingleInstance Force
+#Include %A_ScriptDir%\ec5b.ico ;the printer icon used in the tray icon
 
 ;Configuring how `Send` sends out keys
 SendMode "Event" ;makes Send synonymous with SendEvent instead of SendInput (allows SetKeyDelay to work)
@@ -25,7 +26,13 @@ A_TrayMenu.Add("&About", about) ;adds "About" button and calls "about" when clic
 A_TrayMenu.Add() ;adds a separator
 A_TrayMenu.AddStandard() ;adds default tray menu items including "Suspend Hotkeys" and "Exit"
 
+;@Ahk2Exe-SetMainIcon ec5b.ico ;tells compiler to set exe icon to the printer icon
+FileInstall "ec5b.ico", "ec5b.ico", 1 ;adds the icon file to the compiled exe and extracts it to the exe directory when run
+TraySetIcon("ec5b.ico") ;sets tray icon to ec5b.ico (the printer icon)
 TrayTip("The reserve processor script is now running in the background.`nPress 'alt+r' to process a reserved book", "AGS Library reserve processor", 4) ;shows tray tip (or toast notification on Windows 10+) when the program starts
+/*@Ahk2Exe-Keep
+FileDelete "ec5b.ico" ;deletes the icon after being used above (TrayTip). Only works on compiled version
+*/
 
 about(*){ ;shows the about box
 	;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
@@ -41,7 +48,7 @@ about(*){ ;shows the about box
 	aboutGui.Add("Text", "x10 y10 w310 h30 +0x200", "Library reserve processor")
 	aboutGui.SetFont("s8 Norm cBlack", "Ms Shell Dlg")
 	
-	aboutGui.Add("Text", "x10 y45", "version 0.5.0-beta-AHK") ;**change version number here**
+	aboutGui.Add("Text", "x10 y45", "version 0.6.0-beta-AHK") ;**change version number here**
 	
 	aboutGui.Add("Text", "x327 y270", "© 2024 George Gong, Jimson Cui") ;copyright information
 	aboutGui.SetFont("s10 Norm cBlack", "Ms Shell Dlg")
